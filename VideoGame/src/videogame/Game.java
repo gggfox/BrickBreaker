@@ -24,9 +24,9 @@ public class Game implements Runnable {
     private Thread thread;          // thread to create the game
     private boolean running;        // to set the game
     private Player player;          // to use a player
-    private LinkedList<Bad> bads;                // to use a bad guy
+//    private LinkedList<Bad> bads;                // to use a bad guy
     private KeyManager keyManager;  // to manage the keyboard
-    private MouseManager mouseManager; // to manage the mouse
+//    private MouseManager mouseManager; // to manage the mouse
     
     
     /**
@@ -41,9 +41,9 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-        mouseManager = new MouseManager();
+    //    mouseManager = new MouseManager();
         // creating my bad list
-        bads = new LinkedList<Bad>();
+     //   bads = new LinkedList<Bad>();
     }
 
     /**
@@ -69,17 +69,19 @@ public class Game implements Runnable {
          display = new Display(title, getWidth(), getHeight());  
          Assets.init();
          player = new Player(0, getHeight() - 100, 1, 100, 100, this);
-         int iPosY;
-         int iNum = (int) (Math.random() * 5) + 3;
-         for (int i = 1; i <= iNum; i++) {
-             iPosY = (int) (Math.random() * getHeight() - 100);
-             bads.add(new Bad(getWidth() * 3 / 2, iPosY, 100, 100, this));
-         }
+        
+//         int iPosY;
+//         int iNum = (int) (Math.random() * 5) + 3;    
+//         for (int i = 1; i <= iNum; i++) {
+//             iPosY = (int) (Math.random() * getHeight() - 100);
+//             bads.add(new Bad(getWidth() * 3 / 2, iPosY, 100, 100, this));
+//         }
+         
          display.getJframe().addKeyListener(keyManager);
-         display.getJframe().addMouseListener(mouseManager);
-         display.getJframe().addMouseMotionListener(mouseManager);
-         display.getCanvas().addMouseListener(mouseManager);
-         display.getCanvas().addMouseMotionListener(mouseManager);
+//         display.getJframe().addMouseListener(mouseManager);
+//         display.getJframe().addMouseMotionListener(mouseManager);
+//         display.getCanvas().addMouseListener(mouseManager);
+//         display.getCanvas().addMouseMotionListener(mouseManager);
     }
     
     @Override
@@ -117,23 +119,23 @@ public class Game implements Runnable {
         return keyManager;
     }
     
-    public MouseManager getMouseManager() {
-        return mouseManager;
-    }
+//    public MouseManager getMouseManager() {
+//        return mouseManager;
+//    }
     private void tick() {
         keyManager.tick();
         // avancing player and bads and check collisions 
         player.tick();
-        for (int i = 0; i < bads.size(); i++) {
-            Bad bad =  bads.get(i);
-            bad.tick();
-            if (player.intersecta(bad)) {
-                Assets.bomb.play();
-                int iPosY = (int) (Math.random() * getHeight() - 100);
-                bad.setY(iPosY);
-                bad.setX((int) (Math.random() * getWidth() * 3 / 2) + getWidth());
-            }
-        }
+//        for (int i = 0; i < bads.size(); i++) {
+//            Bad bad =  bads.get(i);
+//            bad.tick();
+//            if (player.intersecta(bad)) {
+//                Assets.bomb.play();
+//                int iPosY = (int) (Math.random() * getHeight() - 100);
+//                bad.setY(iPosY);
+//                bad.setX((int) (Math.random() * getWidth() * 3 / 2) + getWidth());
+//            }
+//        }
         
 
     }
@@ -155,10 +157,10 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
             player.render(g);
-            for (int i = 0; i < bads.size(); i++) {
-                Bad bad =  bads.get(i);
-                bad.render(g);
-            }
+//            for (int i = 0; i < bads.size(); i++) {
+//                Bad bad =  bads.get(i);
+//                bad.render(g);
+//            }
             bs.show();
             g.dispose();
         }

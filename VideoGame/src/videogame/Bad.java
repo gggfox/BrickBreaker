@@ -79,7 +79,6 @@ public class Bad extends Item{
     }
 
     public Rectangle getPerimetro() {
-
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 

@@ -18,6 +18,7 @@ public class Player extends Item{
     private int width;
     private int height;
     private Game game;
+    private int velocity;
     
     public Player(int x, int y, int direction, int width, int height, Game game) {
         super(x, y);
@@ -25,6 +26,7 @@ public class Player extends Item{
         this.width = width;
         this.height = height;
         this.game = game;
+        this.velocity = 5;
     }
 
     public int getDirection() {
@@ -54,36 +56,36 @@ public class Player extends Item{
     @Override
     public void tick() {
         // moving player depending on flags
-        if (game.getMouseManager().isIzquierdo()) {
-            setX(game.getMouseManager().getX());
-            setY(game.getMouseManager().getY());
-            game.getMouseManager().setIzquierdo(false);
-        }
-        if (game.getKeyManager().up) {
-           setY(getY() - 1);
-        }
-        if (game.getKeyManager().down) {
-           setY(getY() + 1);
-        }
+//        if (game.getMouseManager().isIzquierdo()) {
+//            setX(game.getMouseManager().getX());
+//            setY(game.getMouseManager().getY());
+//            game.getMouseManager().setIzquierdo(false);
+//        }
+//        if (game.getKeyManager().up) {
+//           setY(getY() - 1);
+//        }
+//        if (game.getKeyManager().down) {
+//           setY(getY() + 1);
+//        }
         if (game.getKeyManager().left) {
-           setX(getX() - 1);
+           setX(getX() - velocity);
         }
         if (game.getKeyManager().right) {
-           setX(getX() + 1);
+           setX(getX() + velocity);
         }
         // reset x position and y position if colision
-        if (getX() + 60 >= game.getWidth()) {
-            setX(game.getWidth() - 60);
+        if (getX() + getWidth() >= game.getWidth()) {
+            setX( game.getWidth() - getWidth() );
         }
-        else if (getX() <= -30) {
-            setX(-30);
+         if (getX() <= 0 ) {
+            setX(0);
         }
-        if (getY() + 80 >= game.getHeight()) {
-            setY(game.getHeight() - 80);
-        }
-        else if (getY() <= -20) {
-            setY(-20);
-        }
+//        if (getY() + 80 >= game.getHeight()) {
+//            setY(game.getHeight() - 80);
+//        }
+//        else if (getY() <= -20) {
+//            setY(-20);
+//        }
     }
     
     public Rectangle getPerimetro() {

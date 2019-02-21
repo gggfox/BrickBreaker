@@ -20,10 +20,10 @@ public class Assets {
      * initializing the images of the game
      */
     public static void init() {
-        background = ImageLoader.loadImage("/images/Background.jpg");
-        player = ImageLoader.loadImage("/images/mario.png");
+        background = ImageLoader.loadImage("/images/breaking-bad.jpg");
+        player = ImageLoader.loadImage("/images/brick.png");
         bad = ImageLoader.loadImage("/images/malo.png");
-        bomb = new SoundClip("/sounds/blip.wav");
+        bomb = new SoundClip("/sounds/goddamnit.wav");
     }
     
 }
