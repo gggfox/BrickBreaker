@@ -8,6 +8,7 @@ package videogame;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+
 /**
  *
  * @author antoniomejorado
@@ -20,6 +21,11 @@ public class Player extends Item{
     private Game game;
     private int velocity;
     
+    private Animation animationUp;
+    private Animation animationLeft;
+    private Animation animationRight;
+    private Animation animationDown;
+    
     public Player(int x, int y, int direction, int width, int height, Game game) {
         super(x, y);
         this.direction = direction;
@@ -27,6 +33,19 @@ public class Player extends Item{
         this.height = height;
         this.game = game;
         this.velocity = 5;
+        
+        this.animationUp = new Animation(Assets.playerUp, 100);
+        this.animationLeft = new Animation(Assets.playerLeft, 100);
+        this.animationRight = new Animation(Assets.playerRight, 100);
+        this.animationDown = new Animation(Assets.playerDown, 100);
+    }
+    
+    public int getSpeed(){
+        return velocity;
+    }
+    
+    public void setSpeed(int velocity){
+        this.velocity = velocity;
     }
 
     public int getDirection() {
@@ -56,36 +75,21 @@ public class Player extends Item{
     @Override
     public void tick() {
         // moving player depending on flags
-//        if (game.getMouseManager().isIzquierdo()) {
-//            setX(game.getMouseManager().getX());
-//            setY(game.getMouseManager().getY());
-//            game.getMouseManager().setIzquierdo(false);
-//        }
-//        if (game.getKeyManager().up) {
-//           setY(getY() - 1);
-//        }
-//        if (game.getKeyManager().down) {
-//           setY(getY() + 1);
-//        }
+        this.animationRight.tick();
+
         if (game.getKeyManager().left) {
-           setX(getX() - velocity);
+           setX(getX() - getSpeed() );
         }
         if (game.getKeyManager().right) {
-           setX(getX() + velocity);
+           setX(getX() + getSpeed() );
         }
         // reset x position and y position if colision
-        if (getX() + getWidth() >= game.getWidth()) {
-            setX( game.getWidth() - getWidth() );
+        if (getX() + 150 >= game.getWidth()) {
+            setX(game.getWidth() - 150);
         }
-         if (getX() <= 0 ) {
-            setX(0);
+        else if (getX() <= -10) {
+            setX(-10);
         }
-//        if (getY() + 80 >= game.getHeight()) {
-//            setY(game.getHeight() - 80);
-//        }
-//        else if (getY() <= -20) {
-//            setY(-20);
-//        }
     }
     
     public Rectangle getPerimetro() {
@@ -99,6 +103,7 @@ public class Player extends Item{
 
     @Override
     public void render(Graphics g) {
+        //g.drawImage(animationRight.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
         g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
     }
 }

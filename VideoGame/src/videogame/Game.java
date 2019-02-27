@@ -26,7 +26,6 @@ public class Game implements Runnable {
     private Player player;          // to use a player
 //    private LinkedList<Bad> bads;                // to use a bad guy
     private KeyManager keyManager;  // to manage the keyboard
-//    private MouseManager mouseManager; // to manage the mouse
     
     
     /**
@@ -41,7 +40,6 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-    //    mouseManager = new MouseManager();
         // creating my bad list
      //   bads = new LinkedList<Bad>();
     }
@@ -68,7 +66,7 @@ public class Game implements Runnable {
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
          Assets.init();
-         player = new Player(0, getHeight() - 100, 1, 100, 100, this);
+         player = new Player(0, getHeight() - 80, 1, 150, 70, this);
         
 //         int iPosY;
 //         int iNum = (int) (Math.random() * 5) + 3;    
@@ -78,10 +76,6 @@ public class Game implements Runnable {
 //         }
          
          display.getJframe().addKeyListener(keyManager);
-//         display.getJframe().addMouseListener(mouseManager);
-//         display.getJframe().addMouseMotionListener(mouseManager);
-//         display.getCanvas().addMouseListener(mouseManager);
-//         display.getCanvas().addMouseMotionListener(mouseManager);
     }
     
     @Override
@@ -119,9 +113,6 @@ public class Game implements Runnable {
         return keyManager;
     }
     
-//    public MouseManager getMouseManager() {
-//        return mouseManager;
-//    }
     private void tick() {
         keyManager.tick();
         // avancing player and bads and check collisions 
